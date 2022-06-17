@@ -1,0 +1,101 @@
+@import "../../style/variables";
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: $login-base;
+  box-sizing: border-box; 
+  box-shadow: $global-box-shadow;
+  border-radius: 10px;
+
+  h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: $login-text;
+    text-align: center;
+  }
+
+  .user-box {
+    position: relative;
+
+    input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: $login-text;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid $login-text;
+      outline: none;
+      background: $login-base;
+    }
+
+    label {
+      position: absolute;
+      top:0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: $login-contrast-bright;
+      pointer-events: none;
+      transition: .2s;
+    }
+
+    input:focus ~ label,
+    input:valid ~ label,
+    input:-webkit-autofill ~ label{
+      top: -25px;
+      left: 0;
+      color: $login-contrast-bright;
+      font-size: 12px;
+    }
+  
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:valid {
+      border-bottom: 1px solid $login-text;
+      -webkit-text-fill-color: white;
+      -webkit-box-shadow: 0 0 0px 1000px $login-base inset;
+      transition: background-color 5000s ease-in-out 0s;
+      caret-color: white;
+    }
+  }
+
+  form button {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    background: $login-contrast-bright;
+    font-size: 16px;
+    cursor: pointer;
+    color: $login-text;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    border: none;
+    border-radius: 5px;
+    outline:none;
+  }
+  button:hover, button:focus {
+    box-shadow: 0 0 5px $login-contrast-bright,
+                0 0 15px $login-contrast-bright,
+                0 0 30px $login-contrast-bright,
+                0 0 50px $login-contrast-bright;
+    font-weight: 900;
+  }
+
+  @media only screen and (max-width: 480px) {
+    width: 85vw;
+    min-width: 300px;
+  }
+
+}
