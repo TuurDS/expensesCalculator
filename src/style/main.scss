@@ -14,7 +14,7 @@ html {
 }
     
 body {
-    background: $global-bg-colour;
+    background-color: $global-bg-colour;
     overflow-x: hidden;
 }
 
@@ -32,4 +32,18 @@ h3 {
 
 p {
     font-size: 17pt;
+}
+
+.base-box {
+    $width: 100vw;
+    $height: 100vh;
+    width: $width;
+    height: $height;
+    max-width: calc($width);
+    max-height: calc($height);
+}
+
+.blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
 }

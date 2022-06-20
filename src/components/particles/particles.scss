@@ -1,0 +1,16 @@
+#tsparticles {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    max-width: inherit;
+    max-height: inherit;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    z-index: -1;     
+}
+canvas {
+   max-width: inherit;
+   max-height: inherit;
+}

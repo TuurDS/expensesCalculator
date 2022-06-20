@@ -5,6 +5,7 @@ import { useSession } from "../../hooks/useSession";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Loader from "../../components/loader/Loader";
+import Particles from '../../components/particles/Particles';
 
 export default function Login() {
     const { isAuth } = useSession();
@@ -42,7 +43,9 @@ export default function Login() {
 
   return (
   <>
-        <div className={`login-box ${(loading ? 'blurred' : '')}`}> 
+  <div className={`base-box ${(loading ? 'blurred' : '')}`}>  
+      <Particles/>
+      <div className="login-box"> 
         <h2>Login</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
             <div className="user-box">
@@ -70,5 +73,6 @@ export default function Login() {
             </button >
         </form>
     </div>
-    {loading && <Loader />}
+  </div>
+  {loading && <Loader />}
   </>)};

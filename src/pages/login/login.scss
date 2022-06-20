@@ -1,7 +1,7 @@
 @import "../../style/variables";
 
 .login-box {
-  position: absolute;
+  position: absolute; 
   top: 50%;
   left: 50%;
   width: 400px;
@@ -45,9 +45,9 @@
       transition: .2s;
     }
 
+    input:-webkit-autofill ~ label,
     input:focus ~ label,
-    input:valid ~ label,
-    input:-webkit-autofill ~ label{
+    input:valid ~ label {
       top: -25px;
       left: 0;
       color: $login-contrast-bright;
@@ -72,7 +72,8 @@
     display: inline-block;
     padding: 10px 20px;
     background: $login-contrast-bright;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 900;
     cursor: pointer;
     color: $login-text;
     text-decoration: none;
