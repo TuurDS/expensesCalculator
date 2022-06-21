@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Loader from "../../components/loader/Loader";
 import Particles from '../../components/particles/Particles';
+import Notifications from '../../components/notifications/Notifications';
+import { useNotification } from "../../hooks/useNotifications";
 
 export default function Login() {
-    const { isAuth } = useSession();
+  const { isAuth, resolveError } = useSession();
     const { login, error, loading } = useLogin();
     const { register, handleSubmit, reset, formState } = useForm();
     const navigate = useNavigate();
+    const { active, message, resolution, notificationType, fireNotification, exit } = useNotification();
 
     useEffect(() => {
         if (!isAuth) return;
@@ -36,18 +39,21 @@ export default function Login() {
     });
 
     const handleError = (error) => {
-        if (!loading) return;
-        //TODO: handle error
-        console.log(error);
+      if (loading) return; // Guard clause
+      fireNotification(0, error, error );
+
+      resolveError();
     }
+
 
   return (
   <>
   <div className={`base-box ${(loading ? 'blurred' : '')}`}>  
       <Particles/>
+      <Notifications message={message} resolution={resolution} notificationType={notificationType} isActive={active} exit={exit} />
       <div className="login-box"> 
         <h2>Login</h2>
-        <form onSubmit={handleSubmit(handleLogin)}>
+      <form onSubmit={handleSubmit(handleLogin)}>
             <div className="user-box">
                 <input 
                 type="text"

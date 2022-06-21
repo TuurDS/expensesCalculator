@@ -36,9 +36,12 @@ export const AuthProvider = ({ children }) => {
             setError('');
             const { data } = await userApi.login(username, password);
             setToken(data.token);
+            if(parseJWT(data.token) === undefined) {
+                throw Error("Username Or Password is incorrect");
+            }
             setUser(parseJWT(data.token).user);
         } catch (error) {
-            setError(error);
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -83,14 +86,19 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem(JWT_TOKEN_KEY);
     }, [setSession]);
 
+    const resolveError = useCallback(() => {
+        setError('');
+    }, []);
+
+
     useEffect(() => {
         if (!token) return;
         setSession(token);
     }, [setSession, token]);
 
     const value = useMemo(() => ({
-        loading, error, login, logout, ready, token, user
-    }), [loading, error, login, logout, ready, token, user]);
+        loading, error, login, logout, ready, token, user, resolveError
+    }), [loading, error, login, logout, ready, token, user, resolveError]);
 
     return (
         <AuthContext.Provider value={value}>
