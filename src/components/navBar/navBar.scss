@@ -1,0 +1,37 @@
+@import "../../style/variables";
+
+.navbarBody {
+    color: $dark-very-light;
+    .title {
+        h1 {
+            font-size: 24px;
+            margin: 5px;
+            padding: 5px;
+        }
+    }
+    .menu {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 85%;
+        border-bottom: 1px solid $dark-very-light;
+    }
+    .tile {
+        margin: 10px;
+        padding: 5px;
+        font-size: 20px;
+    }
+    .tile:hover {
+        color: white;
+    }
+}
+.styleSwitch {
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    position: fixed;
+    bottom: 50px;
+    .react-switch {
+        vertical-align: middle;
+        margin-left: 4px;
+    }
+}

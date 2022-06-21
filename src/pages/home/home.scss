@@ -1,0 +1,23 @@
+@import "../../style/variables";
+
+.parent {
+    background-color: $dark-middle-dark;
+    margin: 5px;
+    border-radius: 15px;
+    width: 99vw;
+    height: 98vh;
+    display: flex;
+   //justify-content: space-around;
+}
+
+.nav {
+    height: 100%;
+    width: 20%;   
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.userBar {
+    height: 10%;
+    width: 75%;
+}

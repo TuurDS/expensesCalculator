@@ -1,0 +1,31 @@
+@import "../../style/variables";
+
+.userbarBody {
+    
+    color: $dark-very-light;
+    .searchBarDiv input{
+        float: left;
+        padding: 6px;
+        border: none;
+        margin: 20px;
+        margin-left: 30px;
+        width: 50%;
+        font-size: 16px;
+        background: linear-gradient(90deg, rgba(44,47,51,1) 0%, rgba(110,112,114,1) 100%);
+        border-radius: 5px;
+    }
+    .userContainer {
+        text-align:right;
+        .user{
+            display: inline-block;
+            margin-left: 15px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+        .notification {
+            display: inline-block;
+            margin-left: 15px;
+            padding: 10px;
+        }
+    }
+}

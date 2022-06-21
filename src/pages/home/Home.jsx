@@ -1,15 +1,18 @@
-import React,{useCallback} from 'react'
-import { useLogout } from '../../hooks/useLogout';
-export default function Home() {
-    const logout = useLogout();
-    const handleLogout = useCallback(async () => {
-        await logout();
-    }, [logout]);
+import React from 'react'
+import NavBar from '../../components/navBar/NavBar';
+import './home.scss';
+import UserBar from '../../components/userBar/UserBar';
 
+export default function Home() {
     return (
-  <>
-    <div>Home</div>
-    <button className='logout' data-cy="logout_btn" onClick={() => handleLogout()}> Uitloggen</button>
-  </>
+  <div className='parent'>
+    <div className="nav">
+      <NavBar/>
+    </div>
+    <div className='userBar'>
+      <UserBar />
+    </div>
+    
+  </div>
   )
 }
