@@ -10,7 +10,7 @@ import Notifications from '../../components/notifications/Notifications';
 import { useNotification } from "../../hooks/useNotifications";
 
 export default function Login() {
-  const { isAuth, resolveError } = useSession();
+    const { isAuth, resolveError } = useSession();
     const { login, error, loading } = useLogin();
     const { register, handleSubmit, reset, formState } = useForm();
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ export default function Login() {
                 />
                 <label>Password</label>
             </div>
-            <button type="submit">
+            <button type="submit" className='global-button'>
                 Login
             </button >
         </form>

@@ -1,30 +1,52 @@
 @import "../../style/variables";
 
 .navbarBody {
-    color: $dark-very-light;
+    color: #fff;
     .title {
         h1 {
-            font-size: 24px;
-            margin: 5px;
-            padding: 5px;
+            font-size: 22px;
+            margin: 5px 5px 5px 0;
+            padding: 5px 5px 5px 0;
         }
     }
     .menu {
-        padding-top: 10px;
+        color: $dark-very-light;
+        margin-top: 40px;
         padding-bottom: 10px;
         width: 85%;
         border-bottom: 1px solid $dark-very-light;
     }
     .tile {
-        margin: 10px;
-        padding: 5px;
-        font-size: 20px;
+        font-size: 16px;
+        transition: 0.3s;
+        color: #808191;
+        margin: 20px 20px 20px 0;
+        padding: 5px 5px 5px 0;
     }
-    .tile:hover {
+    .tile:hover, .tile.active {
         color: white;
+        .icon {
+            color: white;
+            background-color: #22B07D;
+        }
     }
+    
+    .icon {
+        margin-right:15px;
+        transition: 0.3s;
+        color: #808191;
+        background-color: #353340;
+        text-align: center;
+        padding:6px 7px 6px 7px;
+        border-radius: 12px;
+        svg {
+            transform: translateY(2px);
+        }
+    }
+
 }
 .styleSwitch {
+    color: $dark-very-light;
     margin: 10px;
     padding: 5px;
     font-size: 20px;

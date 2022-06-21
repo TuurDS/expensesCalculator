@@ -1,23 +1,28 @@
 @import "../../style/variables";
 
+.base-box{
+    background-color: $global-bg-colour;
+}
+
 .parent {
-    background-color: $dark-middle-dark;
-    margin: 5px;
+    background: $login-base;
+    margin: 15;
     border-radius: 15px;
-    width: 99vw;
-    height: 98vh;
+    width: 97%;
+    height: 96%;
     display: flex;
-   //justify-content: space-around;
+    padding: 30px;
+    box-shadow: $global-box-shadow;
+    
 }
 
 .nav {
     height: 100%;
     width: 20%;   
-    padding-top: 20px;
-    padding-left: 20px;
 }
 
 .userBar {
     height: 10%;
-    width: 75%;
+    width: 80%;
+    
 }

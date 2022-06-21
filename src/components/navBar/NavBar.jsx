@@ -4,12 +4,15 @@ import {AiFillHome} from 'react-icons/ai'
 import {AiFillFileExcel} from 'react-icons/ai'
 import Switch from "react-switch";
 
-export default function NavBar() {
+export default function NavBar({active = 0}) {
   const [checked, setChecked] = useState(false);
   const handleChange = nextChecked => {
     setChecked(nextChecked);
   };
 
+  const nav = new Map()
+  .set(0, ['Home', <AiFillHome />])
+  .set(1, ['Mijn expenses', <AiFillFileExcel/>])
 
   return (
     <div className='navbarBody'>
@@ -17,8 +20,17 @@ export default function NavBar() {
             <h1>Expense Calculator</h1>
         </div>
         <div className='menu'>Menu
-            <div className='tile'><AiFillHome /> Home</div>
-            <div className='tile'><AiFillFileExcel/> Mijn expenses</div>
+        {
+          Array.from(nav).map(([key, val]) => {
+            return(
+              <>{console.log(key," ",val)}
+            <div className={`tile ${active===key ? 'active':''}`} key={key}>
+              <span className="icon">{val[1]}</span> 
+                {val[0]}
+            </div>
+            </>)
+          })
+        }
         </div>
             <div className='styleSwitch'>        
                 <Switch
@@ -26,9 +38,9 @@ export default function NavBar() {
                     checked={checked}
                     uncheckedIcon={false}
                     checkedIcon={false}
-                    onColor="#8912de"
+                    onColor="#03e9f4"
                     className="react-switch"
-                /> &ensp; Night mode
+                />&emsp;Night mode
             </div>
     </div>
   )

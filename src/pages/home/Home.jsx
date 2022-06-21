@@ -5,14 +5,15 @@ import UserBar from '../../components/userBar/UserBar';
 
 export default function Home() {
     return (
-  <div className='parent'>
-    <div className="nav">
-      <NavBar/>
+  <div className="base-box">
+    <div className='parent'>
+      <div className="nav">
+        <NavBar/>
+      </div>
+      <div className='userBar'>
+        <UserBar />
+      </div>      
     </div>
-    <div className='userBar'>
-      <UserBar />
-    </div>
-    
   </div>
   )
 }
