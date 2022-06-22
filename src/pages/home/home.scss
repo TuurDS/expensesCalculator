@@ -1,4 +1,5 @@
 @import "../../style/variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 .base-box{
     background-color: $global-bg-colour;
@@ -29,4 +30,21 @@
 
 .right {
     width: 100%;
+    .horizontal {
+        display: flex;
+        flex-direction: row;
+        height: 90%;
+        .sidebar {
+            margin-left: 40px;
+            margin-top: 58px;
+            width: 260px;
+            background-color: #252836;
+            border-radius: 15px;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-family: 'Noto Sans', sans-serif;
+            text-align: center;
+        }
+    }
 }

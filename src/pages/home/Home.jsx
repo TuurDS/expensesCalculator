@@ -15,10 +15,11 @@ export default function Home() {
         <div className="right">
           <div className='userBar'>
             <UserBar />
-          </div>      
-          <div className='events'>
+          </div>    
+          <div className="horizontal">
             <Events />
-          </div>
+            <div className="sidebar">Placeholder</div>
+          </div>  
         </div>
       </div>
     </div>
