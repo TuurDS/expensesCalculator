@@ -57,7 +57,7 @@
                 color: white;
                 background-color: #c04343;
             }
-            .icon:hover {
+            .icon:hover, .icon.pinned {
                 background-color: #22B07D;
             }
         }
