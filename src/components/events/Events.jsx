@@ -1,5 +1,5 @@
 import "./events.scss" ;
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useEvents } from '../../hooks/useEvents';
 import { useSession } from '../../hooks/useSession';
 
@@ -15,6 +15,12 @@ export default function Events() {
     useEffect(() => {
         fetchEvents();
     }, [fetchEvents])
+
+    
+    const togglePin = (id) => {
+        let map = JSON.parse(localStorage.getItem("pinnedEvents"));
+        console.log(map);
+    }
 
     return (
     <>
@@ -36,7 +42,7 @@ export default function Events() {
                 </div>
                 
                 <div className="event-right"> 
-                    <div className="pin"><FontAwesomeIcon icon={faThumbtack} className='icon'/></div>
+                    <div className="pin" onClick={() => togglePin(event.id)}><FontAwesomeIcon icon={faThumbtack} className='icon'/></div>
                 </div> 
             </div>
             
