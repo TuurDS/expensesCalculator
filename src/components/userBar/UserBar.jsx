@@ -1,29 +1,48 @@
-import React,{useCallback, useState } from 'react';
-import {AiFillBell} from 'react-icons/ai'
 import './userBar.scss';
+import React,{useCallback, useState } from 'react';
 import { useSession } from '../../hooks/useSession';
 import { useLogout } from '../../hooks/useLogout';
 
-import { faUser,faMarker, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faMarker, faMagnifyingGlass, faAngleDown, faCircle, faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DefaultUserImg from "../../assets/img/default-user.png";
 
 export default function UserBar() {
-  const logout = useLogout();
-    const handleLogout = useCallback(async () => {
-        await logout();
-    }, [logout]);
+    const logout = useLogout();
 
     const { user } = useSession();
     
-    const [showDropdown, setShowDropdown] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false);
 
-    function toggleDropdown(){
-      if(showDropdown) {
-        setShowDropdown(false);
-        return;
+    const myStateRef = React.useRef(showDropdown);
+    const setMyState = data => {
+      myStateRef.current = data;
+      setShowDropdown(data);
+    };
+
+    const handleClickOutside = useCallback((e) => {
+      if(myStateRef.current) {
+        if(!(e.path.map(e => e.className).includes('dropdown show') || e.path.map(e => e.className).includes('user'))) {
+          setMyState(false);
+          document.removeEventListener('mousedown', handleClickOutside);
+        }
       }
-      setShowDropdown(true);
+    },[]);
+
+    function toggleDropDown(){
+      if(myStateRef.current) {
+        setMyState(false);
+        document.removeEventListener('mousedown', handleClickOutside);
+        return;
+      };
+      setMyState(true);
+      document.addEventListener('mousedown', handleClickOutside);
     }
+
+    const handleLogout = useCallback(async () => {
+      document.removeEventListener('mousedown', handleClickOutside);  
+      await logout();
+    }, [handleClickOutside, logout]);
 
   return (
     <div className='userbarBody'>
@@ -32,12 +51,17 @@ export default function UserBar() {
         <div className="icon"><FontAwesomeIcon icon={faMagnifyingGlass}/></div>
       </div>
       <div className='userContainer'>
-        <div className='user' onClick={() => toggleDropdown()}> {user.name} </div>
+        <div className='user' onClick={() => toggleDropDown()}>
+          <div className='userIcon'><img src={DefaultUserImg} alt="userImage" /></div> 
+          <div className="text">{user.name}</div> 
+          <div className={`icon ${showDropdown ? "rotate":""}`}><FontAwesomeIcon icon={faAngleDown}/></div>
+        </div>
+        
         <div className={`dropdown ${showDropdown ? "show":""}`}>
           <div className="username"> 
             <div> 
               <div className='icon'><FontAwesomeIcon icon={faUser}/></div>
-               <div>User</div> 
+               <div>Username</div> 
             </div>
             <div className="prop">{user.name}</div>
           </div>
@@ -53,7 +77,7 @@ export default function UserBar() {
             <button className='global-button' onClick={() => handleLogout()}> Uitloggen</button>
           </div>
         </div>
-        <div className='notification'> <AiFillBell/> </div>
+        <div className='notification'> <FontAwesomeIcon icon={faBell}/> <FontAwesomeIcon icon={faCircle}/></div>
       </div>
 
     </div>

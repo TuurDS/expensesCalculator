@@ -1,6 +1,7 @@
 import './style/main.scss';
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
+import { EventsProvider } from './contexts/EventsProvider';
 import PrivateRoute from './components/PrivateRoute';
 //pages
 import Home from './pages/home/Home';
@@ -17,7 +18,9 @@ function App() {
           <Route exact path="/login/" element={<Login />} />
           <Route exact path="/" element={
             <PrivateRoute roleBlacklist={[]}>
-              <Home />
+              <EventsProvider>
+                <Home />
+              </EventsProvider>
             </PrivateRoute>
           } />
           <Route exact path="*" element={<Error />} />

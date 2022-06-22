@@ -23,13 +23,11 @@ export default function NavBar({active = 0}) {
         {
           Array.from(nav).map(([key, val]) => {
             return(
-              <>{console.log(key," ",val)}
             <div className={`tile ${active===key ? 'active':''}`} key={key}>
               <span className="icon">{val[1]}</span> 
                 {val[0]}
             </div>
-            </>)
-          })
+            )})
         }
         </div>
             <div className='styleSwitch'>        
