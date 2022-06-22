@@ -2,6 +2,7 @@ import "./events.scss" ;
 import React, { useEffect, useState } from 'react'
 import { useEvents } from '../../hooks/useEvents';
 import { useSession } from '../../hooks/useSession';
+import { useNavigate } from "react-router-dom";
 
 import DefaultUserImg from "../../assets/img/default-user.png";
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
@@ -11,15 +12,19 @@ export default function Events() {
   
     const { fetchEvents, events, loading, error } = useEvents();
     const { user } = useSession();
+    const navigate = useNavigate();
     
     useEffect(() => {
         fetchEvents();
     }, [fetchEvents])
-
     
     const togglePin = (id) => {
         let map = JSON.parse(localStorage.getItem("pinnedEvents"));
         console.log(map);
+    }
+
+    const getEvent = (id) => {
+        navigate(`/event/${id}`);
     }
 
     return (
@@ -28,7 +33,7 @@ export default function Events() {
     <div className="title">Events</div>
     {!loading && events.map((event, index) => {
         return (
-            <div className='event' key={event.id}>
+            <div className='event' key={event.id} onClick={() => getEvent(event.id)}>
                 <div className="event-left">
 
                     <div className='number'>{`${index + 1 < 10 ? "0": ""}${index+1}`}</div>

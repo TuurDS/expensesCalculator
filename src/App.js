@@ -8,6 +8,7 @@ import Home from './pages/home/Home';
 import Error from './pages/error/Error';
 //routes
 import Login from './pages/login/Login';
+import EventPage from './pages/event/EventPage';
 
 function App() {
 
@@ -20,6 +21,13 @@ function App() {
             <PrivateRoute roleBlacklist={[]}>
               <EventsProvider>
                 <Home />
+              </EventsProvider>
+            </PrivateRoute>
+          } />
+          <Route exact path="/event/:id" element={
+            <PrivateRoute roleBlacklist={[]}>
+              <EventsProvider>
+                <EventPage />
               </EventsProvider>
             </PrivateRoute>
           } />
