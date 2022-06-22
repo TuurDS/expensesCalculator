@@ -18,7 +18,24 @@ export const EventsProvider = ({ children }) => {
             const { data } = await EventsAPI.getEvents();
             setEvents(data);
             //simulate loading time
-            await new Promise(resolve => setTimeout(resolve, 500));
+            //await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    const searchEvents = useCallback(async (string) => {
+        try {
+            setError("");
+            setLoading(true);
+            
+            setEvents([]);
+            const { data } = await EventsAPI.searchEvents(string);
+            setEvents(data);
+            //simulate loading time
+            //await new Promise(resolve => setTimeout(resolve, 500));
         } catch (error) {
             setError(error);
         } finally {
@@ -27,8 +44,8 @@ export const EventsProvider = ({ children }) => {
     }, []);
 
     const value = useMemo(() => ({
-        fetchEvents, events, loading, error
-    }), [fetchEvents, events, loading, error]);
+        fetchEvents, searchEvents, events, loading, error
+    }), [fetchEvents, searchEvents, events, loading, error]);
 
     return (
         <EventsContext.Provider value={value}>

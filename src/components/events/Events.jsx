@@ -48,7 +48,7 @@ export default function Events() {
             
         )})
     }
-    {loading && <div className="loading"><div className="loadingRing">loading</div></div>}
+    {/* {loading && <div className="loading"><div className="loadingRing">loading</div></div>} */}
     </div>
     </>
   )

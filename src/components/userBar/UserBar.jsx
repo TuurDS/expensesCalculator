@@ -1,5 +1,7 @@
 import './userBar.scss';
 import React,{useCallback, useState } from 'react';
+
+import { useEvents } from '../../hooks/useEvents';
 import { useSession } from '../../hooks/useSession';
 import { useLogout } from '../../hooks/useLogout';
 
@@ -10,6 +12,7 @@ import DefaultUserImg from "../../assets/img/default-user.png";
 export default function UserBar() {
     const logout = useLogout();
 
+    const { fetchEvents, searchEvents, events, loading, error } = useEvents();
     const { user } = useSession();
     
     const [showDropdown, setShowDropdown] = useState(false);
@@ -44,10 +47,18 @@ export default function UserBar() {
       await logout();
     }, [handleClickOutside, logout]);
 
+    const search = (string) => {
+      if (string !== "") {
+        searchEvents(string);
+      } else {
+        fetchEvents()
+      }
+    }
+
   return (
     <div className='userbarBody'>
       <div className="searchBarDiv">
-        <input type="text" placeholder="Search" />
+        <input type="search" placeholder="Search" onChange={(e) =>  search(e.target.value)}/>
         <div className="icon"><FontAwesomeIcon icon={faMagnifyingGlass}/></div>
       </div>
       <div className='userContainer'>
