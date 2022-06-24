@@ -5,10 +5,10 @@ export const EventsContext = createContext();
 
 export const EventsProvider = ({ children }) => {
     const [events, setEvents] = useState([]);
+    const [pinnedEvents, setPinnedEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [pinnedEvents, setPinnedEvents] = useState([]);
-
+    const [search, setSearch] = useState('');
 
     const fetchEvents = useCallback(async () => {
         try {
@@ -16,14 +16,12 @@ export const EventsProvider = ({ children }) => {
             setLoading(true);
             setEvents([]);
             const { data } = await EventsAPI.getEvents();
-            //sort data on data.pinned
             const pinned = data.filter(event => event.pinned);
             const unpinned = data.filter(event => !event.pinned);
             const sortedEvents = [...pinned, ...unpinned];
             setEvents(sortedEvents);
             setPinnedEvents(pinned);
-            //simulate loading time
-            //await new Promise(resolve => setTimeout(resolve, 500));
+            setSearch('');
         } catch (error) {
             setError(error);
         } finally {
@@ -36,10 +34,14 @@ export const EventsProvider = ({ children }) => {
             setError("");
             setLoading(true);
             setEvents([]);
+            setSearch(string);
             const { data } = await EventsAPI.searchEvents(string);
-            setEvents(data);
-            //simulate loading time
-            //await new Promise(resolve => setTimeout(resolve, 500));
+            const pinned = data.filter(event => event.pinned);
+            const unpinned = data.filter(event => !event.pinned);
+            const sortedEvents = [...pinned, ...unpinned];
+            setEvents(sortedEvents);
+            setPinnedEvents(pinned);
+            await new Promise(resolve => setTimeout(resolve, 500));
         } catch (error) {
             setError(error);
         } finally {
@@ -54,8 +56,6 @@ export const EventsProvider = ({ children }) => {
             setPinnedEvents([]);
             const { data } = await EventsAPI.getPinnedEvents(string);
             setPinnedEvents(data);
-            //simulate loading time
-            //await new Promise(resolve => setTimeout(resolve, 500));
         } catch (error) {
             setError(error);
         } finally {
@@ -76,8 +76,8 @@ export const EventsProvider = ({ children }) => {
     }, []);
 
     const value = useMemo(() => ({
-        fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent
-    }), [fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent]);
+        fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent, search
+    }), [fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent, search]);
 
     return (
         <EventsContext.Provider value={value}>

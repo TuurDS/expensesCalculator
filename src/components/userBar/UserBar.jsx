@@ -48,6 +48,7 @@ export default function UserBar() {
     }, [handleClickOutside, logout]);
 
     const search = (string) => {
+      string = string.trim();
       if (string !== "") {
         searchEvents(string);
       } else {
