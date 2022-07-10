@@ -39,9 +39,9 @@
             margin-right: 20px;
             display: flex;
             flex-direction: row;
-            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 7px 0px 0px #0000007d;
             margin-left: 15px;
-            transition: 0.35s;
+            transition: 0.25s cubic-bezier(.4,1,0,1);
             
             .event-left{
                 display: flex;
@@ -94,7 +94,10 @@
                 .number {
                     color:#22B07D;
                 }
-
+            }
+            &:active {
+                box-shadow: 0px 3px 0px 0px #0000007d;
+                transform: translateY(4px);
             }
         }
     
