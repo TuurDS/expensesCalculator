@@ -2,6 +2,7 @@
 
 .navbarBody {
     color: #fff;
+    min-width: 250px;
     .title {
         h1 {
             font-size: 22px;
@@ -17,31 +18,26 @@
         border-bottom: 1px solid $dark-very-light;
     }
     .tile {
-        font-size: 16px;
         transition: 0.3s;
-        color: #808191;
+        font-size: 16px;
+        background-color: #333644;
         margin: 20px 20px 20px 0;
-        padding: 5px 5px 5px 0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 7px 0px 0px rgb(0 0 0 / 49%);
         white-space: nowrap;
-    }
-    .tile:hover, .tile.active {
-        color: white;
-        .icon {
+        color: #808191;
+        &:hover, &.tile.active {
             color: white;
             background-color: #22B07D;
+            box-shadow: 0px 7px 0px 0px #175941;
         }
     }
     
     .icon {
         margin-right:15px;
-        transition: 0.3s;
-        color: #808191;
-        background-color: #353340;
-        text-align: center;
-        padding:6px 7px 6px 7px;
-        border-radius: 12px;
         svg {
-            transform: translateY(2px);
+            transform: scale(1.3) translateY(1px);
         }
     }
 

@@ -20,7 +20,7 @@ export default function Events() {
         } else {
             await fetchEvents();
         }
-      },[fetchEvents, searchEvents, search]);
+    },[fetchEvents, searchEvents, search]);
      
     useEffect(() => {
         updateEvents();
@@ -39,7 +39,7 @@ export default function Events() {
     <>
     <div className='events'>
         <div className="title">Events</div>
-        <div className="scrollbar">
+        <div className="scroll">
         {!loading && events.map((event, index) => {
             return (
                 <div className='event' key={event.id} onClick={(e) => getEvent(e,event.id)}>

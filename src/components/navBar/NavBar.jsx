@@ -30,16 +30,16 @@ export default function NavBar({active = 0}) {
             )})
         }
         </div>
-            <div className='styleSwitch'>        
-                <Switch
-                    onChange={handleChange}
-                    checked={checked}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    onColor="#03e9f4"
-                    className="react-switch"
-                />&emsp;Night mode
-            </div>
+        {/* <div className='styleSwitch'>        
+            <Switch
+                onChange={handleChange}
+                checked={checked}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                onColor="#03e9f4"
+                className="react-switch"
+            />&emsp;Night mode
+        </div> */}
     </div>
   )
 }

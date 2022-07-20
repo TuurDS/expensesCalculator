@@ -5,15 +5,14 @@ import { useEvents } from '../../hooks/useEvents';
 import { useSession } from '../../hooks/useSession';
 import { useLogout } from '../../hooks/useLogout';
 
-import { faUser,faMarker, faMagnifyingGlass, faAngleDown, faCircle, faBell } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faMarker, faMagnifyingGlass, faAngleDown, faCircle, faBell, faHouse, faThumbtack, faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DefaultUserImg from "../../assets/img/default-user.png";
 
-export default function UserBar() {
-    const logout = useLogout();
-
-    const { fetchEvents, searchEvents, events, loading, error } = useEvents();
-    const { user } = useSession();
+export default function UserBar({active = 0}) {
+  const { fetchEvents, searchEvents, events, loading, error } = useEvents();
+  const { user } = useSession();
+  const logout = useLogout();
     
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -23,9 +22,20 @@ export default function UserBar() {
       setShowDropdown(data);
     };
 
+    const search = async (string) => {
+      string = string.trim();
+      if (string !== "") {
+        await searchEvents(string);
+      } else {
+        await fetchEvents();
+      }
+    }
+
     const handleClickOutside = useCallback((e) => {
       if(myStateRef.current) {
-        if(!(e.path.map(e => e.className).includes('dropdown show') || e.path.map(e => e.className).includes('user'))) {
+        if(!(e.path.map(e => e.className).includes('dropdown show') || 
+        (e.path.map(e => e.className).includes('user') && e.path.map(e => e.className).includes('userContainer')
+        ))) {
           setMyState(false);
           document.removeEventListener('mousedown', handleClickOutside);
         }
@@ -47,19 +57,15 @@ export default function UserBar() {
       await logout();
     }, [handleClickOutside, logout]);
 
-    const search = (string) => {
-      string = string.trim();
-      if (string !== "") {
-        searchEvents(string);
-      } else {
-        fetchEvents()
-      }
-    }
+    const nav = new Map()
+    .set(0, ['Home', faHouse])
+    .set(1, ['Mijn expenses', faMoneyBillTransfer])
+    .set(2, ['pinned Events', faThumbtack])
 
   return (
     <div className='userbarBody'>
       <div className="searchBarDiv">
-        <input type="search" placeholder="Search" onChange={(e) =>  search(e.target.value)}/>
+        <input type="search" placeholder="Search" onChange={async(e) => await search(e.target.value)}/>
         <div className="icon"><FontAwesomeIcon icon={faMagnifyingGlass}/></div>
       </div>
       <div className='userContainer'>
@@ -89,9 +95,27 @@ export default function UserBar() {
             <button className='global-button' onClick={() => handleLogout()}> Uitloggen</button>
           </div>
         </div>
-        <div className='notification'> <FontAwesomeIcon icon={faBell}/> <FontAwesomeIcon icon={faCircle}/></div>
-      </div>
 
+        <div className='notification'> <FontAwesomeIcon icon={faBell}/> <FontAwesomeIcon icon={faCircle}/></div>
+        <div class="spinner-master">
+          <input type="checkbox" id="spinner-form"/>
+          <label class="spinner-spin" for="spinner-form">
+              <div class="spinner diagonal part-1"></div>
+              <div class="spinner horizontal"></div>
+              <div class="spinner diagonal part-2"></div>
+          </label>
+          <div className="items">
+            {
+            Array.from(nav).map(([key, val]) => {
+              return(
+              <div className={`nav-item ${active === key? "active": ""}`} key={key}>
+                  {val[0]}
+              </div>
+              )})
+            }
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

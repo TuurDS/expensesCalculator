@@ -1,34 +1,21 @@
 @import "../../style/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
-.base-box{
-    background-color: $global-bg-colour;
-}
+// .base-box{
+//     background-color: $global-bg-colour;
+// }
 
-.parent {
-    background: $login-base;
-    margin: 15;
-    border-radius: 15px;
-    width: 97%;
-    height: 96%;
-    display: flex;
-    padding: 30px;
-    box-shadow: $global-box-shadow;
+// .nav {
+//     height: 100%;
+//     width: 20%;   
+// }
+
+// .userBar {
+//     height: 10%;
+//     width: 100%;
     
-}
+// }
 
-.nav {
-    height: 100%;
-    width: 20%;   
-}
-
-.userBar {
-    height: 10%;
-    width: 100%;
-    
-}
-
-.right {
-    width: 100%;
-    
-}
+// .right {
+//     width: 100%; 
+// }

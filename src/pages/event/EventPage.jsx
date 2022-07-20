@@ -7,14 +7,12 @@ export default function EventPage() {
 
     return (
     <div className="base-box">
-      <div className='parent'>
-        <div className="nav">
-          <NavBar/>
-        </div>
-        <div className="right">
-          <div className='userBar'>
-            <UserBar />
-          </div>
+      <div className="nav">
+        <NavBar/>
+      </div>
+      <div className="right">
+        <div className='userBar'>
+          <UserBar />
         </div>
       </div>
     </div>

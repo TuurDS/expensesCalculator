@@ -8,7 +8,6 @@ export default function Home() {
 
     return (
     <div className="base-box">
-      <div className='parent'>
         <div className="nav">
           <NavBar/>
         </div>
@@ -16,12 +15,14 @@ export default function Home() {
           <div className='userBar'>
             <UserBar />
           </div>    
-          <div className="horizontal">
+          <div className="content">
             <Events />
-            <div className="sidebar">Placeholder</div>
-          </div>  
+            <div className="friends">
+              <div className="title">Coming soon</div>
+              <div className="container"></div>
+            </div>
+          </div> 
         </div>
-      </div>
     </div>
     )
 }

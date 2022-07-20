@@ -1,51 +1,86 @@
 @import "../../style/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
-.base-box{
+.base-box {
     background-color: $global-bg-colour;
-}
-
-.parent {
-    background: $login-base;
-    margin: 15;
-    border-radius: 15px;
-    width: 97%;
-    height: 96%;
-    display: flex;
-    padding: 30px;
-    box-shadow: $global-box-shadow;
-    
+    padding: 20px;
+    position: fixed;
 }
 
 .nav {
     height: 100%;
-    width: 20%;   
+    width: 240px;
+    @media only screen and (max-width: 1000px) {
+        display: none;
+        visibility: hidden;
+    }
 }
 
 .userBar {
-    height: 10%;
+    height: 70px;
     width: 100%;
-    
 }
 
 .right {
     width: 100%;
-    .horizontal {
+    height: 100%;
+    .content {
         display: flex;
         flex-direction: row;
-        height: 90%;
-        .sidebar {
-            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
-            margin-left: 40px;
-            margin-top: 58px;
-            width: 260px;
-            background-color: #333644;
-            border-radius: 15px;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            font-family: 'Noto Sans', sans-serif;
-            text-align: center;
+        height: calc(100% - 70px);
+        .friends {
+            margin-left: 20px;
+            .title {
+                font-size: 30px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                color: white;
+                margin-bottom: 20px;
+            }
+            .container {
+                box-shadow: 0px 7px 0px 0px #0000007d;
+                width: 260px;
+                height: calc(100% - 70px);
+                background-color: #333644;
+                border-radius: 15px;
+                color: white;
+                padding: 20px;
+                font-size: 24px;
+                font-family: 'Noto Sans', sans-serif;
+                text-align: center;
+            }
         }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .right {
+        .content {
+            flex-direction: column;
+            overflow: auto;
+            width: 100%;
+            .events{
+                height: fit-content;
+                .scroll {
+                    height: fit-content;
+                    min-height: 120px;
+                    .loadingRing {
+                        transform: translateY(45px) scale(0.6);
+                    }
+                }
+            }
+            .friends {
+                .title {
+                    transform: translateX(-15px);
+                    font-size: 20px;
+                    margin: 10px 0 20px 0;
+                }
+                .container {
+                    height: 150px;
+                    width: calc(100% - 25px);
+                    margin-bottom: 20px;
+                }
+            }
+        } 
     }
 }

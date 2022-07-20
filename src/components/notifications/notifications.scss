@@ -19,6 +19,7 @@
     box-shadow: $global-box-shadow;
     border-radius: 8px;
     z-index: 10;
+
     @media only screen and (max-width: 480px) {
         width: 85vw;
         min-width: 300px;
@@ -29,11 +30,13 @@
         font-size: 30px;
         margin: 10px 30px 10px 10px;
     }
+
     .exit svg {
         color: #4b4952;
         font-size: 28px;
         margin: 0;
     }
+    
     .exit {
         margin: 5px 10px auto 0;
         cursor: pointer;
