@@ -45,10 +45,6 @@ a {
     height: $height;
     max-width: calc($width);
     max-height: calc($height);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .blurred {
@@ -84,6 +80,7 @@ box-shadow: 0 0 5px $login-contrast-bright,
 font-weight: 900;
 }
 
+
 * {
     --scrollbarBG: #494c57;
     --thumbBG: #acb1c2; 
@@ -107,4 +104,9 @@ div::-webkit-scrollbar-thumb {
 
 input::-ms-clear{
     display: none;
+}
+
+img {
+    width: 50px;
+    height: 50px;
 }

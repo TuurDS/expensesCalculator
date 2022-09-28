@@ -1,21 +1,29 @@
 @import "../../style/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+.eventPage {
 
-// .base-box{
-//     background-color: $global-bg-colour;
-// }
-
-// .nav {
-//     height: 100%;
-//     width: 20%;   
-// }
-
-// .userBar {
-//     height: 10%;
-//     width: 100%;
+    .pagetitle {
+        color: white;
+        h1 {
+            font-size: 22px;
+            margin: 5px 5px 5px 0;
+            padding: 5px 5px 5px 0;
+        }
+    }
+    .pagetitle {
+        grid-area: pagetitle;
+    }
+    .navbar {
+        grid-area: navbar;
+    }
     
-// }
-
-// .right {
-//     width: 100%; 
-// }
+    .userbar {
+        grid-area: userbar;
+    }
+    
+    .base-box {
+        display: grid;
+        grid-template-columns: auto 3fr;
+        grid-template-rows: auto 1fr;
+    }
+}

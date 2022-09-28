@@ -1,0 +1,37 @@
+@import "../../../../style/variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.searchbar {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    transition: 0.25s cubic-bezier(.4,1,0,1);
+
+    input {
+        padding: 12px 10px 12px 15px;
+        border: none;
+        background: linear-gradient(90deg, rgb(71, 73, 75) 0%, rgba(110,112,114,1) 100%);
+        border-radius: 7px;
+        outline: none;
+        caret-color: white;
+        width: 100%;
+        font-size: 17px;
+        font-weight: 500;
+        font-family: 'Noto Sans', sans-serif;
+        color: white;
+        &::placeholder { 
+            color: rgb(136, 136, 136);
+            font-weight: 600;
+        }
+        &::-webkit-search-cancel-button {
+            display: none;
+        }
+    }
+    .icon {
+        color: $light-dark;
+        display: inline !important;
+        transform: translate(-34px,12px);
+    }  
+}

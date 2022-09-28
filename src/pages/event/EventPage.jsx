@@ -1,20 +1,17 @@
 import './eventPage.scss';
 import React from 'react'
-import NavBar from '../../components/navBar/NavBar';
-import UserBar from '../../components/userBar/UserBar';
+import NavBar from '../../components/shared/navBar/NavBar';
+import UserBar from '../../components/shared/userBar/UserBar';
 
 export default function EventPage() {
 
     return (
-    <div className="base-box">
-      <div className="nav">
-        <NavBar/>
+      <div className="base-box">
+      <div className='pagetitle'>
+          <h1>Expense Calculator</h1>
       </div>
-      <div className="right">
-        <div className='userBar'>
-          <UserBar />
-        </div>
-      </div>
-    </div>
+      <UserBar />
+      <NavBar/>
+  </div>
     )
 }

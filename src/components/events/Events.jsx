@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DefaultUserImg from "../../assets/img/default-user.png";
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import Loader from '../loader/Loader';
 export default function Events() {
   
     const { fetchEvents,searchEvents , events, loading, updatePinnedEvent, search} = useEvents();
@@ -74,7 +74,7 @@ export default function Events() {
             )})
         }
         {!loading && events.length === 0 && <div className="no-events">Sorry, we couldn't find any results</div>}
-        {loading && <div className="loading"><div className="loadingRing">loading</div></div>}
+        {loading && <Loader/>}
         </div>
     </div>
     </>

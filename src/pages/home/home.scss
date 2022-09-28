@@ -1,86 +1,110 @@
 @import "../../style/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
-.base-box {
-    background-color: $global-bg-colour;
-    padding: 20px;
-    position: fixed;
+.pagetitle {
+    color: white;
+    h1 {
+        font-size: 22px;
+        margin: 5px 5px 5px 0;
+        padding: 5px 5px 5px 0;
+    }
+}
+.friends {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    background-color: #333644;
+    border-radius: 20px;
+    margin: 20px;
+    box-shadow: 0px 7px 0px 0px #0000007d;
+    transition: 0.25s cubic-bezier(.4,1,0,1);
+    .title {
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: white;
+        margin-bottom: 20px;
+    }
 }
 
-.nav {
-    height: 100%;
-    width: 240px;
-    @media only screen and (max-width: 1000px) {
+/*LAYOUT*/
+.pagetitle {
+    grid-area: pagetitle;
+}
+.navbar {
+    grid-area: navbar;
+}
+
+.userbar {
+    grid-area: userbar;
+}
+
+.events {
+    grid-area: events;
+}
+
+.friends {
+    grid-area: friends;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+$baseBoxPadding: 10px;
+$gridGap: 10px;
+$topBarHeight: 50px;
+.base-box {
+    padding: $baseBoxPadding;
+    grid-gap: $gridGap;
+    display: grid;
+    grid-template-columns: auto 3fr 1fr;
+    grid-template-rows: $topBarHeight calc(100vh - $topBarHeight - $gridGap - 2 * $baseBoxPadding);
+    grid-template-areas: 
+    "pagetitle userbar userbar" 
+    "navbar events friends";
+}
+
+@media screen and (max-width: 1200px) {
+    .base-box {
+        $friendsHeight: 200px;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: $topBarHeight calc(100vh - $topBarHeight - $friendsHeight - $gridGap - 3 * $baseBoxPadding) $friendsHeight;
+        grid-template-areas: 
+        "pagetitle userbar" 
+        "navbar events" 
+        "friends friends";
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .base-box {
+        $friendsHeight: 200px;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto $friendsHeight;
+        grid-template-areas: 
+        "userbar menu" 
+        "events events" 
+        "friends friends";
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .navbar, .pagetitle {
         display: none;
+    }
+    
+    .searchbar:focus-within {
+        width: calc(100vw - 5px) !important;
+    }
+
+    .searchbar:focus-within ~ .user {
         visibility: hidden;
     }
-}
 
-.userBar {
-    height: 70px;
-    width: 100%;
-}
-
-.right {
-    width: 100%;
-    height: 100%;
-    .content {
-        display: flex;
-        flex-direction: row;
-        height: calc(100% - 70px);
-        .friends {
-            margin-left: 20px;
-            .title {
-                font-size: 30px;
-                font-weight: 500;
-                letter-spacing: 1px;
-                color: white;
-                margin-bottom: 20px;
-            }
-            .container {
-                box-shadow: 0px 7px 0px 0px #0000007d;
-                width: 260px;
-                height: calc(100% - 70px);
-                background-color: #333644;
-                border-radius: 15px;
-                color: white;
-                padding: 20px;
-                font-size: 24px;
-                font-family: 'Noto Sans', sans-serif;
-                text-align: center;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    .right {
-        .content {
-            flex-direction: column;
-            overflow: auto;
-            width: 100%;
-            .events{
-                height: fit-content;
-                .scroll {
-                    height: fit-content;
-                    min-height: 120px;
-                    .loadingRing {
-                        transform: translateY(45px) scale(0.6);
-                    }
-                }
-            }
-            .friends {
-                .title {
-                    transform: translateX(-15px);
-                    font-size: 20px;
-                    margin: 10px 0 20px 0;
-                }
-                .container {
-                    height: 150px;
-                    width: calc(100% - 25px);
-                    margin-bottom: 20px;
-                }
-            }
-        } 
+    .hamburgermenu {
+        visibility: visible !important;
     }
 }

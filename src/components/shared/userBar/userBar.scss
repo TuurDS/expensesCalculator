@@ -1,0 +1,75 @@
+@import "../../../style/variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.searchbar {
+    grid-area: searchbar;
+}
+
+.user {
+    grid-area: user;
+}
+
+.notification {
+    grid-area: notification;
+}
+
+.dropdown {
+    grid-area: dropdown;
+}
+
+.userbar {
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr auto auto 0fr; 
+    grid-template-areas: 
+    "searchbar user notification dropdown";
+
+    .user {
+        color: #fff;
+        text-align:right;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    
+        .userIcon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            cursor: pointer;
+        }
+        .text {
+            cursor: pointer;
+        }
+        .icon {
+            cursor: pointer;
+            color: #808191;
+            svg {
+                transition:all 0.5s cubic-bezier(.27,.87,.71,.93);
+                transform: rotate(180deg);
+            }
+            &.rotate {
+                svg {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+    
+        .notification {
+            min-width: 25px;
+            color: #808191;
+            cursor: pointer;
+            display: inline-block;
+            svg:last-of-type {
+                transform: translate(-9px,-8px);
+                font-size: 7px;
+                color: #EA5F5F;
+            }
+        }
+    }
+}
+
+

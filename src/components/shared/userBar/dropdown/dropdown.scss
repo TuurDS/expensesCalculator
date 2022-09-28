@@ -1,0 +1,77 @@
+@import "../../../../style/variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.dropdown {
+    position: absolute;
+    right:0;
+    top:65px;
+    background-color: #333644;
+    box-shadow: 0px 3px 0px 0px #211F29;
+    visibility: hidden;
+    height: 0px;
+    width: 250px;
+    transition:all 0.5s cubic-bezier(.27,.87,.71,.93);
+    overflow: hidden;
+    border-radius: 15px;
+    
+    .username, .role {
+        background-color: #444546;
+        margin: 10px;
+        padding: 17px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 15px;
+        font-size: 14px;
+        div:first-of-type{
+            color: #fff;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            div {
+                font-family: 'Noto Sans', sans-serif;
+            }
+        }
+        .icon {
+            color: #fff;
+        }
+        .prop {
+            color: $login-contrast-bright;
+            font-family: 'Noto Sans', sans-serif;
+        }
+    }
+    .line {
+        transform: translateX(10px);
+        width: calc(100% - 20px);
+        border-bottom: 1px solid $dark-very-light;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .logoutDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            margin-top:8px;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: 2px;
+            font-family: 'Noto Sans', sans-serif;
+            border-radius: 15px;
+            width: calc(100% - 20px);
+        }  
+        button:hover, button:focus {
+            box-shadow: 0 0 5px $login-contrast-bright,
+            0 0 1px $login-contrast-bright,
+            0 0 10px $login-contrast-bright,
+            0 0 20px $login-contrast-bright;
+        } 
+    }            
+}
+
+.dropdown.show {
+    visibility: visible;
+    height: 213px;
+    box-shadow: 0px 7px 0px 0px #211F29;
+}

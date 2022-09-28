@@ -35,6 +35,12 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .ring {
+    transform:translate(-50%,-50%) scale(0.7);
+  } 
+}
+
 @keyframes animateC
 {
   0%

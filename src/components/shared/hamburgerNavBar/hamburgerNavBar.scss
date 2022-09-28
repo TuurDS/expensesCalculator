@@ -1,0 +1,115 @@
+@import "../../../style/variables";
+
+//menu button
+$menuColor: #000;
+$lineWidth: 3px;
+$spaceBetween: 7px;
+
+.hamburgermenu {
+    visibility: hidden;
+    height: calc(3 * ($lineWidth + $spaceBetween));
+    width: calc(3 * ($lineWidth + $spaceBetween));
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    label {
+        position: relative;
+        display: block;
+        height: calc(3 * ($lineWidth + $spaceBetween));
+        width: calc(3 * ($lineWidth + $spaceBetween));
+        cursor: pointer;
+        z-index: 0;
+    }
+    .spinner {
+        height: $lineWidth;
+        width: 100%;
+        background-color: $menuColor;
+        transition: 0.3s;
+    }
+
+    .horizontal, .part-2 {
+        margin-top: $spaceBetween;
+    }
+
+    .spinner-spin {
+        transform: translate(-5px,8px);
+    }
+
+    input[type="checkbox"]:checked ~ {
+        .spinner-spin {
+            .horizontal {
+                opacity: 0;
+            }
+            .diagonal.part-1 {
+                transform: translateY(calc($lineWidth + $spaceBetween)) rotate(-135deg);
+
+            }
+            .diagonal.part-2 {
+                transform: translateY(calc(-1 * ($lineWidth + $spaceBetween))) rotate(135deg);
+            }
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .items, .tile {
+            transition: 0.3s;
+        }
+    }
+    
+    .items {
+        position:absolute;
+        z-index: 10;
+        width: 100vw;
+        height: fit-content;
+        background-color: #2f2c3d;
+        box-shadow: 0px 7px 0px 0px #211F29;
+        border-radius: 0px 0px 15px 15px;
+        top: 0px;
+        left: calc(-1000vw + 100% + 20px);
+        padding: 15px 60px 30px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        
+        .tile {
+            display: flex;
+            font-size: 16px;
+            background-color: #363946;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 7px 0px 0px rgb(0 0 0 / 49%);
+            white-space: nowrap;
+            color: #898a9a;
+    
+            &:hover, &.tile.active {
+                color: white;
+                background-color: #22B07D;
+                box-shadow: 0px 7px 0px 0px #175941;
+            }
+    
+            .icon {
+                min-width: 20px;
+                margin-right:15px;
+                svg {
+                    transform: scale(1.3) translateY(1px);
+                }
+            }
+        }
+    }
+
+    input[type="checkbox"]:checked ~ {
+        .items {
+            left: 0;
+            position: fixed;
+        }
+        .spinner-spin {
+            position: fixed;
+        }
+        label {
+            z-index: 99;
+        }
+    }
+
+}
