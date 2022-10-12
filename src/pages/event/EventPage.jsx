@@ -12,7 +12,7 @@ export default function EventPage() {
 
     const updateEventData = useCallback(async () => {
         await fetchEventData(id);
-    }, [fetchEventData, id]);
+    }, [fetchEventData,id]);
 
     useEffect(() => {
         updateEventData();
@@ -23,7 +23,6 @@ export default function EventPage() {
             <div className='pagetitle'>
                 <h1>Expense Calculator</h1>
             </div>
-            {console.log(eventData)}
             <ExpensesList data={{ fetchEventData, eventData, loading, error }} />
             <UserBar />
             <NavBar />
