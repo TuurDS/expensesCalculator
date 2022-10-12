@@ -2,6 +2,7 @@ import './eventPage.scss';
 import React, { useEffect, useCallback } from 'react'
 import NavBar from '../../components/shared/navBar/NavBar';
 import UserBar from '../../components/shared/userBar/UserBar';
+import ExpensesList from '../../components/expenses/ExpensesList';
 import { useParams } from 'react-router-dom';
 import { useEventData } from '../../hooks/useEventData';
 
@@ -23,6 +24,7 @@ export default function EventPage() {
                 <h1>Expense Calculator</h1>
             </div>
             {console.log(eventData)}
+            <ExpensesList data={{ fetchEventData, eventData, loading, error }} />
             <UserBar />
             <NavBar />
         </div>
