@@ -3,6 +3,7 @@ import React,{useCallback, useState } from 'react';
 
 import Dropdown from './dropdown/Dropdown';
 import SearchBar from './searchbar/SearchBar';
+import { useEvents } from '../../../hooks/useEvents';
 import { useSession } from '../../../hooks/useSession';
 import { useLogout } from '../../../hooks/useLogout';
 
@@ -48,9 +49,20 @@ export default function UserBar() {
       await logout();
     }, [handleClickOutside, logout]);
 
+    const { fetchEvents, searchEvents} = useEvents();
+    
+    const search = async (string) => {
+      string = string.trim();
+      if (string !== "") {
+        await searchEvents(string);
+      } else {
+        await fetchEvents();
+      }
+    }
+
   return (
     <div className='userbar'>
-        <SearchBar/>
+        <SearchBar search={search}/>
         <div className='user'>
           <div onClick={() => toggleDropDown()} className='userIcon'><img src={DefaultUserImg} alt="userImage" /></div> 
           <div onClick={() => toggleDropDown()} className="text">{user.name}</div> 
