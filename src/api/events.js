@@ -15,3 +15,8 @@ export const searchEvents = async (string) => {
 export const updatePinned = async (eventId, pinned) => {
     return await axios.put(`/event/pin`, { id: eventId, pinned: pinned });
 }
+
+export const getEventById = async (id) => {
+    const value = await axios.get(`/event/${id}`);
+    return value;
+}

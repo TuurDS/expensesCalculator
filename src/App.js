@@ -2,6 +2,7 @@ import './style/main.scss';
 import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
 import { EventsProvider } from './contexts/EventsProvider';
+import { EventsDataProvider } from './contexts/EventDataProvider';
 import PrivateRoute from './components/PrivateRoute';
 //pages
 import Home from './pages/home/Home';
@@ -15,24 +16,24 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <Routes>
-          <Route exact path="/login/" element={<Login />} />
-          <Route exact path="/" element={
-            <PrivateRoute roleBlacklist={[]}>
-              <EventsProvider>
+        <EventsProvider>
+          <Routes>
+            <Route exact path="/login/" element={<Login />} />
+            <Route exact path="/" element={
+              <PrivateRoute roleBlacklist={[]}>
                 <Home />
-              </EventsProvider>
-            </PrivateRoute>
-          } />
-          <Route exact path="/event/:id" element={
-            <PrivateRoute roleBlacklist={[]}>
-              <EventsProvider>
-                <EventPage />
-              </EventsProvider>
-            </PrivateRoute>
-          } />
-          <Route exact path="*" element={<Error />} />
-        </Routes>
+              </PrivateRoute>
+            } />
+            <Route exact path="/event/:id" element={
+              <PrivateRoute roleBlacklist={[]}>
+                <EventsDataProvider>
+                  <EventPage />
+                </EventsDataProvider>
+              </PrivateRoute>
+            } />
+            <Route exact path="*" element={<Error />} />
+          </Routes>
+        </EventsProvider>
       </AuthProvider>
     </>
   )

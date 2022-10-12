@@ -3,12 +3,14 @@
 
 .pagetitle {
     color: white;
+
     h1 {
         font-size: 22px;
         margin: 5px 5px 5px 0;
         padding: 5px 5px 5px 0;
     }
 }
+
 .friends {
     display: flex;
     flex-direction: row;
@@ -17,7 +19,8 @@
     border-radius: 20px;
     margin: 20px;
     box-shadow: 0px 7px 0px 0px #0000007d;
-    transition: 0.25s cubic-bezier(.4,1,0,1);
+    transition: 0.25s cubic-bezier(.4, 1, 0, 1);
+
     .title {
         font-size: 24px;
         font-weight: 500;
@@ -31,6 +34,7 @@
 .pagetitle {
     grid-area: pagetitle;
 }
+
 .navbar {
     grid-area: navbar;
 }
@@ -54,15 +58,16 @@
 $baseBoxPadding: 10px;
 $gridGap: 10px;
 $topBarHeight: 50px;
+
 .base-box {
     padding: $baseBoxPadding;
     grid-gap: $gridGap;
     display: grid;
     grid-template-columns: auto 3fr 1fr;
     grid-template-rows: $topBarHeight calc(100vh - $topBarHeight - $gridGap - 2 * $baseBoxPadding);
-    grid-template-areas: 
-    "pagetitle userbar userbar" 
-    "navbar events friends";
+    grid-template-areas:
+        "pagetitle userbar userbar"
+        "navbar events friends";
 }
 
 @media screen and (max-width: 1200px) {
@@ -70,10 +75,10 @@ $topBarHeight: 50px;
         $friendsHeight: 200px;
         grid-template-columns: auto 1fr;
         grid-template-rows: $topBarHeight calc(100vh - $topBarHeight - $friendsHeight - $gridGap - 3 * $baseBoxPadding) $friendsHeight;
-        grid-template-areas: 
-        "pagetitle userbar" 
-        "navbar events" 
-        "friends friends";
+        grid-template-areas:
+            "pagetitle userbar"
+            "navbar events"
+            "friends friends";
     }
 }
 
@@ -82,29 +87,35 @@ $topBarHeight: 50px;
         $friendsHeight: 200px;
         grid-template-columns: 1fr auto;
         grid-template-rows: auto auto $friendsHeight;
-        grid-template-areas: 
-        "userbar menu" 
-        "events events" 
-        "friends friends";
+        grid-template-areas:
+            "userbar menu"
+            "events events"
+            "friends friends";
     }
 
     ::-webkit-scrollbar {
         width: 0;
     }
 
-    .navbar, .pagetitle {
+    .navbar,
+    .pagetitle {
         display: none;
     }
-    
+
     .searchbar:focus-within {
         width: calc(100vw - 5px) !important;
     }
 
-    .searchbar:focus-within ~ .user {
+    .searchbar:focus-within~.user {
         visibility: hidden;
     }
 
     .hamburgermenu {
         visibility: visible !important;
+        display: block !important;
+    }
+
+    .scroll {
+        overflow-y: visible !important;
     }
 }
