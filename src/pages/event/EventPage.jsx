@@ -13,9 +13,12 @@ export default function EventPage() {
     const updateEventData = useCallback(async () => {
         await fetchEventData(id);
     }, [fetchEventData,id]);
+    
+    console.log("function EventPage");
 
     useEffect(() => {
         updateEventData();
+        console.log("useEffect");
     }, [updateEventData]);
 
     return (

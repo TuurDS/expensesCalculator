@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [ready, setReady] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
     const [error, setError] = useState('');
 
     
@@ -35,10 +36,10 @@ export const AuthProvider = ({ children }) => {
             setLoading(true);
             setError('');
             const { data } = await userApi.login(username, password);
-            setToken(data.token);
             if(parseJWT(data.token) === undefined) {
                 throw Error("Username Or Password is incorrect");
             }
+            setToken(data.token);
             setUser(parseJWT(data.token).user);
         } catch (error) {
             setError(error.message);
@@ -47,44 +48,57 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    const resetAuth = () => {
+        localStorage.removeItem(JWT_TOKEN_KEY);
+        setToken(null);
+        setUser(null);
+        setIsAuth(false);
+        setReady(true);
+        setError('');
+        API.setAuthToken(null);
+    };
+
     const setSession = useCallback(async (token) => {
         try {
+            //if there is no token reset the auth
             if (!token) {
-                setToken(null);
-            } else {
-                const { exp, user } = parseJWT(token);
-                const expiry = parseExp(exp);
-
-                if (!expiry || !user) {
-                    localStorage.removeItem(JWT_TOKEN_KEY);
-                    return;
-                }
-                
-                const stillValid = expiry >= new Date();
-                if (stillValid) {
-                    localStorage.setItem(JWT_TOKEN_KEY, token);
-                } else {
-                    localStorage.removeItem(JWT_TOKEN_KEY);
-                    token = null;
-                }
-
-                API.setAuthToken(token);
-                setToken(token);
-
-                setUser(user);
-                setReady(stillValid);
+                resetAuth();
+                return;
             }
+            const { exp, user } = parseJWT(token);
+            const expiry = parseExp(exp);
+
+            //if there is no expiry or user in the destructured object reset auth
+            if (!expiry || !user) {
+                resetAuth();
+                return;
+            }
+            
+            const stillValid = expiry >= new Date();
+
+            //IF NOT VALID, RESET AUTH
+            if (!stillValid) {
+                resetAuth();
+                return;
+            }
+            localStorage.setItem(JWT_TOKEN_KEY, token);
+            
+            API.setAuthToken(token);
+            setToken(token);
+            
+            setUser(user);
+            setIsAuth(true);
         } catch (error) {
             setError(error);
-            setSession(null);
-            localStorage.removeItem(JWT_TOKEN_KEY);
+            resetAuth();
+        } finally {
+            setReady(true);
         }
     }, []);
 
     const logout = useCallback(() => {
-        setSession(null);
-        localStorage.removeItem(JWT_TOKEN_KEY);
-    }, [setSession]);
+        resetAuth();
+    }, []);
 
     const resolveError = useCallback(() => {
         setError('');
@@ -92,13 +106,16 @@ export const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        if (!token) return;
+        if (!token) {
+            setReady(true);
+            return;
+        }
         setSession(token);
     }, [setSession, token]);
 
     const value = useMemo(() => ({
-        loading, error, login, logout, ready, token, user, resolveError
-    }), [loading, error, login, logout, ready, token, user, resolveError]);
+        login, logout, resolveError, loading, error, ready, token, user, isAuth
+    }), [login, logout, resolveError, loading, error, ready, token, user, isAuth]);
 
     return (
         <AuthContext.Provider value={value}>

@@ -8,7 +8,6 @@ export const EventsProvider = ({ children }) => {
     const [pinnedEvents, setPinnedEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [search, setSearch] = useState('');
 
     const fetchEvents = useCallback(async () => {
         try {
@@ -21,7 +20,6 @@ export const EventsProvider = ({ children }) => {
             const sortedEvents = [...pinned, ...unpinned];
             setEvents(sortedEvents);
             setPinnedEvents(pinned);
-            setSearch('');
         } catch (error) {
             setError(error);
         } finally {
@@ -31,10 +29,10 @@ export const EventsProvider = ({ children }) => {
 
     const searchEvents = useCallback(async (string) => {
         try {
+            if(loading) return;
             setError("");
             setLoading(true);
             setEvents([]);
-            setSearch(string);
             const { data } = await EventsAPI.searchEvents(string);
             const pinned = data.filter(event => event.pinned);
             const unpinned = data.filter(event => !event.pinned);
@@ -47,7 +45,7 @@ export const EventsProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [loading]);
 
     const fetchPinnedEvents = useCallback(async (string) => {
         try {
@@ -76,8 +74,8 @@ export const EventsProvider = ({ children }) => {
     }, []);
 
     const value = useMemo(() => ({
-        fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent, search
-    }), [fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent, search]);
+        fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent
+    }), [fetchEvents, searchEvents, fetchPinnedEvents, pinnedEvents, events, loading, error, updatePinnedEvent]);
 
     return (
         <EventsContext.Provider value={value}>

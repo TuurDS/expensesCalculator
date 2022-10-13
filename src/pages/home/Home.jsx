@@ -4,7 +4,6 @@ import NavBar from '../../components/shared/navBar/NavBar';
 import UserBar from '../../components/shared/userBar/UserBar';
 import HamburgerNavBar from '../../components/shared/hamburgerNavBar/HamburgerNavBar';
 import Events from '../../components/events/Events';
-
 export default function Home() {
 
     return (

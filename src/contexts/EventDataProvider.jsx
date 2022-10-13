@@ -8,7 +8,7 @@ export const EventsDataContext = createContext();
 export const EventsDataProvider = ({ children }) => {
     const [eventData, seteventData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     const fetchEventData = useCallback(async (id) => {
         try {

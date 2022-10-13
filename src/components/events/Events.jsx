@@ -2,6 +2,7 @@ import "./events.scss" ;
 import React, { useEffect, useCallback } from 'react'
 import { useEvents } from '../../hooks/useEvents';
 import { useSession } from '../../hooks/useSession';
+import { useSearch } from '../../hooks/useSearch';
 import { useNavigate } from "react-router-dom";
 
 import DefaultUserImg from "../../assets/img/default-user.png";
@@ -10,29 +11,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../loader/Loader';
 export default function Events() {
   
-    const { fetchEvents,searchEvents , events, loading, updatePinnedEvent, search} = useEvents();
+    const { fetchEvents,searchEvents , events, loading, updatePinnedEvent} = useEvents();
+    const { searchString, subscribe, unsubscribe, unsubscribeAll } = useSearch();
     const { user } = useSession();
     const navigate = useNavigate();
     
-    const updateEvents = useCallback(async () => {
-        if (search !== "") {
-            await searchEvents(search);
-        } else {
-            await fetchEvents();
-        }
-    },[fetchEvents, searchEvents, search]);
-     
+    const EventSearch = useCallback(async (searchString) => {
+      let string = searchString?.trim();
+      if (string !== "") {
+        await searchEvents(string);
+      } else {
+        await fetchEvents();
+      }
+      console.log(searchString);
+    },[fetchEvents, searchEvents]);
+
     useEffect(() => {
-        updateEvents();
-    }, [updateEvents]);
+        unsubscribeAll();
+        subscribe(EventSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     
     const togglePin = async (id) => {
         await updatePinnedEvent(id, !events.find(event => event.id === id).pinned);
-        await updateEvents();
+        await EventSearch(searchString);
     }
 
     
     const getEvent = (e, id) => {
+        unsubscribe(EventSearch);
         navigate(`/event/${id}`);
     }
     return (
@@ -48,9 +55,9 @@ export default function Events() {
                         <div className='number'>{`${index + 1 < 10 ? "0": ""}${index+1}`}</div>
                         <div className='eventInfo'>
                             <div className='eventTitle'>
-                                <div dangerouslySetInnerHTML={ {__html: search === "" ? 
+                                <div dangerouslySetInnerHTML={ {__html: searchString === "" ? 
                                 event.name : 
-                                event.name.replace(new RegExp(search, "gi"), `<span class='highlight'>${search.toLowerCase()}</span>`)}} />
+                                event.name.replace(new RegExp(searchString, "gi"), `<span class='highlight'>${searchString.toLowerCase()}</span>`)}} />
                                
 
                             </div>
