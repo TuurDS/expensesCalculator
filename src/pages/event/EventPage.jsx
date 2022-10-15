@@ -1,32 +1,19 @@
 import './eventPage.scss';
-import React, { useEffect, useCallback } from 'react'
+import React from 'react';
 import NavBar from '../../components/shared/navBar/NavBar';
 import UserBar from '../../components/shared/userBar/UserBar';
 import ExpensesList from '../../components/expenses/ExpensesList';
 import { useParams } from 'react-router-dom';
-import { useEventData } from '../../hooks/useEventData';
 
 export default function EventPage() {
     const { id } = useParams();
-    const { fetchEventData, eventData, loading, error } = useEventData();
-
-    const updateEventData = useCallback(async () => {
-        await fetchEventData(id);
-    }, [fetchEventData,id]);
-    
-    console.log("function EventPage");
-
-    useEffect(() => {
-        updateEventData();
-        console.log("useEffect");
-    }, [updateEventData]);
 
     return (
-        <div className="base-box">
+        <div className="base-box2">
             <div className='pagetitle'>
                 <h1>Expense Calculator</h1>
             </div>
-            <ExpensesList data={{ fetchEventData, eventData, loading, error }} />
+            <ExpensesList id={id} />
             <UserBar />
             <NavBar />
         </div>

@@ -4,7 +4,6 @@ import { useSession } from '../hooks/useSession';
 
 export default function PrivateRoute(props) {
     const { isAuth, user, ready } = useSession();
-    console.log("auth");
 
     if (!ready) return null;
 

@@ -1,29 +1,44 @@
 @import "../../style/variables";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
 .eventPage {
 
     .pagetitle {
         color: white;
+
         h1 {
             font-size: 22px;
             margin: 5px 5px 5px 0;
             padding: 5px 5px 5px 0;
         }
     }
+
     .pagetitle {
         grid-area: pagetitle;
     }
+
     .navbar {
         grid-area: navbar;
     }
-    
+
     .userbar {
         grid-area: userbar;
     }
-    
-    .base-box {
+
+    .expenseslist {
+        grid-area: expenseslist;
+    }
+
+    $baseBoxPadding: 10px;
+    $gridGap: 10px;
+    $topBarHeight: 50px;
+
+    .base-box2 {
         display: grid;
-        grid-template-columns: auto 3fr;
-        grid-template-rows: auto 1fr;
+        grid-template-columns: auto 3fr 1fr;
+        grid-template-rows: $topBarHeight calc(100vh - $topBarHeight - $gridGap - 2 * $baseBoxPadding);
+        grid-template-areas:
+            "pagetitle userbar userbar"
+            "navbar expenseslist expenseslist";
     }
 }

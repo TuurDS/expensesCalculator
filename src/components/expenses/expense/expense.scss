@@ -1,0 +1,101 @@
+@import "../../../style/variables";
+
+.description {
+    grid-area: description;
+}
+
+.amount {
+    grid-area: amount;
+}
+
+.date {
+    grid-area: date;
+}
+
+.paidby {
+    grid-area: paidby;
+}
+
+.splittype {
+    grid-area: splittype;
+}
+
+.editicon {
+    grid-area: editicon;
+}
+
+.expense {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "editicon description description description amount"
+        "editicon paidby date splittype amount";
+    grid-gap: 5px;
+}
+
+/*END OF LAYOUT*/
+
+.expense {
+    color: white;
+    margin: 10px;
+    padding: 10px 10px 10px 20px;
+
+    background-color: #333644;
+    border-radius: 15px;
+    box-shadow: 0px 7px 0px 0px #0000007d;
+    transition: 0.20s cubic-bezier(.4, 1, 0, 1);
+    height: fit-content;
+
+    &:hover {
+        margin-right: 0px;
+        margin-left: 0px;
+        background-color: #45405d;
+        cursor: pointer;
+
+        .description {
+            color: #22B07D;
+        }
+    }
+
+    &:active {
+        box-shadow: 0px 3px 0px 0px #0000007d;
+        transform: translateY(4px);
+    }
+}
+
+.label {
+    font-weight: bold;
+    color: #808191 !important;
+    margin-bottom: 5px;
+}
+
+.description {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.amount {
+    color: #22B07D;
+    font-weight: bold;
+    font-size: 20px;
+    //align center with flexbox
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editicon {
+    margin-right: 10px;
+    font-size: 30px;
+    color: #3f6bc4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// GREEN #22B07D
+// BACKGROUND: #333644;
+// HOVER: #45405d
+// GRAY CONTRAST #808191
